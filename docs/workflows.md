@@ -80,13 +80,27 @@ Controllers implement flow control. They generally have input and output poles a
 
 #### Split Controller
 
-The Split controller fans out work by taking an input list and launching one sub-job per item. Provide a dot-path to the list in the previous job context, such as `data.rows`. The engine resolves the path and expects an array; if the value is a string it is trimmed and split by newline.   A special case is `files`, which splits the incoming files array so that each sub-job receives exactly one file. 
+The Split controller fans out work by taking an input list and launching one sub-job per item. Provide an [expression](xyexp.md) to the list in the previous job context, such as `data.rows`. The engine resolves the path and expects an array; if the value is a string it is trimmed and split by newline.   A special case is `files`, which splits the incoming files array so that each sub-job receives exactly one file. 
 
 In the UI, the split controller configuration dialog provides an "Expression Builder" button, which allows you to explore output data from recently completed jobs, and pick out a specific JSON key path to use for the expression string.
 
 Each individual sub-job will receive one item from the split data.  It will arrive in the job's [Job.input](data.md#job-input), either in `data` as a property named `item`, or as a [File](data.md#file) in the `files` array.
 
 Split requires exactly one output connection to the Event or Job node it will run per item. Concurrency and queuing are governed by the limits attached to that node. After all items complete, you can continue the flow using a `continue` wire from the controlled node. The controller includes a "continue percentage" setting so you can require that at least N% of the sub-jobs succeed before continuing.
+
+##### Split Item Filter
+
+You can optionally filter out items from your split array, by including a special item filter expression.  In this context use the special `item` keyword to refer to the item being filtered.  If your expression evaluates to true, the item will be included in the set.  Otherwise, it will be left out.  Here is an example using a property inside the item:
+
+```js
+item.random < 0.5
+```
+
+Also available in context here is `index` (the 0-based index of the current item in the set), `workflow.params` (all workflow-level user fields), and `workflowData` (shared workflow data object).  For example, here is how to filter out all odd items, and only keep the even ones, using the modulo operator:
+
+```js
+index % 2 == 0
+```
 
 #### Join Controller
 
