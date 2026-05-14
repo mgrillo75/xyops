@@ -534,12 +534,20 @@ app.extend({
 		if (!this.hasPrivilege('add_servers')) $('#tab_NewServer').removeClass('enabled').hide();
 		
 		// possibly hide entire admin section
-		if ($('#d_sidebar_admin_group > .section > .section_item.enabled').length) $('#d_sidebar_admin_group').show();
-		else $('#d_sidebar_admin_group').hide();
+		if ($('#d_sidebar_admin_group > .section > .section_item.enabled').length && user_sections.includes('admin')) {
+			$('#d_sidebar_admin_group').show();
+		}
+		else {
+			$('#d_sidebar_admin_group').hide();
+		}
 		
 		// possibly hide entire shortcuts section if all items are hidden
-		if ($('.sidebar > .section.sbs_shortcuts > .section_item.enabled').length) $('.sidebar > .section_title.sbs_shortcuts, .sidebar > .section.sbs_shortcuts').show();
-		else $('.sidebar > .section_title.sbs_shortcuts, .sidebar > .section.sbs_shortcuts').hide();
+		if ($('.sidebar > .section.sbs_shortcuts > .section_item.enabled').length && user_sections.includes('shortcuts')) {
+			$('.sidebar > .section_title.sbs_shortcuts, .sidebar > .section.sbs_shortcuts').show();
+		}
+		else {
+			$('.sidebar > .section_title.sbs_shortcuts, .sidebar > .section.sbs_shortcuts').hide();
+		}
 		
 		// add hint to body tag for admin UI hints
 		if (this.isAdmin()) $('body').addClass('admin');
