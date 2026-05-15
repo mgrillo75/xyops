@@ -181,13 +181,31 @@ The editor defaults new wires from Event/Job outputs to success, and you can cha
 
 ## Continue After Controllers
 
-Repeat, Multiplex and Split support a "continue after controller" flow:
+[Repeat](#repeat-controller), [Multiplex](#multiplex-controller) and [Split](#split-controller) are special because they launch the same Event or Job node multiple times.  For example, Repeat may run the same job 10 times, Multiplex may run it once per server in the target group, and Split may run it once per item or file.
 
-- Configure the controller's "continue percentage" (0-100). This is the minimum percentage of successful sub-jobs required to proceed.
-- Solder wires out of the controlled Event/Job node with the `continue` condition to define what happens next.
-- When all iterations complete, if successes meet or exceed the threshold, all `continue` wires from that Event/Job fire. Otherwise nothing continues and the workflow may finish if no other nodes are active.
+This creates an important distinction for outgoing wires from the controlled event/job node:
 
-Example: Event A → Repeat (x10) → Event A has a `continue` wire → Event B. After all 10 runs of Event A finish, if at least N% succeed (per controller), Event B runs.
+- "On Success", "On Complete", "On Any Error" and tag conditions are evaluated for *each individual sub-job*.  If you wire another node using "On Success" or "On Complete", it may run many times, once for each matching sub-job.
+- "On Continue" is evaluated *only once* for the controller as a whole.  It fires only after all the jobs launched by that Repeat, Multiplex or Split controller have finished.
+
+Use "On Continue" when you want a single next step after the whole controlled set is done.  For example:
+
+```text
++-----------+     +-------+      -------------      +-------+
+| Multiplex | --> | Job A | --> | On Continue | --> | Job B |
++-----------+     +-------+      -------------      +-------+
+```
+
+The "On Continue" wire is soldered from the controlled Event or Job node, not from the controller itself.
+
+In this example, `Job A` runs multiple times, once per selected server.  `Job B` runs only once, and only after every multiplexed `Job A` has completed.  If the wire condition was changed to `On Success` or `On Complete`, then `Job B` would run once for every matching `Job A` instead.
+
+The controller's "continue percentage" setting controls whether the "On Continue" wire is allowed to fire.  It is a number from 0 to 100, representing the minimum percentage of controlled sub-jobs that must succeed.  After the last sub-job finishes, xyOps checks the success percentage:
+
+- If the success percentage meets or exceeds the controller setting, all "On Continue" wires from the controlled Event or Job node fire.
+- If the success percentage is below the controller setting, the "On Continue" wires do not fire, and the workflow may finish if no other nodes are active.
+
+Each "On Continue" condition is scoped to the specific controller and Event/Job node pair it is attached to.  You can have multiple controller sections in the same workflow, and each one waits for its own controlled jobs before firing its own "On Continue" wires.
 
 
 ## Passing Data Between Nodes
