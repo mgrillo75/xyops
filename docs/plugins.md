@@ -925,7 +925,7 @@ A "text" parameter type is presented to the user as a single-line text field.
 
 An optional "variant" property may be included, which changes the visible UI control in the browser: `color`, `date`, `datetime-local`, `email`, `number`, `password`, `text`, `time`, `tel` or `url`.
 
-Note that the parameter value is almost always set to a string -- the "variant" only controls the visual UI control and behavior.  However, the "number" variant is a special case, where the value will actually be parsed and stored in the parameters as an actual JavaScript Number.
+Note that the parameter value is almost always set to a string -- the "variant" only controls the visual UI control and behavior.  However, the "number" variant is a special case, where the value will actually be parsed and stored in the parameters as an actual JavaScript Number.  Also, if the number variant field is empty its value will be `null`.
 
 ### Textarea
 
