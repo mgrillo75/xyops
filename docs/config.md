@@ -811,7 +811,7 @@ Automatically recover incomplete transactions on startup (default: `true`).
 ### Storage.trans_dir
 <!-- Title: Transaction Directory Path -->
 
-Temp directory for transaction logs/journals (default: `data/_transactions`).
+Local directory for transaction rollback logs and recovery bookkeeping (default: `data/_transactions`).  Engines with native transaction support, such as SQLite, Postgres, and Redis, do not write rollback logs for successful commits, but the directory is still used for transaction housekeeping.
 
 ### Storage.log_event_types
 <!-- Title: Log Event Types -->
