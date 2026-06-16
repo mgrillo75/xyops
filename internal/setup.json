@@ -162,8 +162,7 @@
 			"created": 1434125333,
 			"params": [
 				{ "id":"script", "type":"code", "title":"Script Source", "value": "#!/bin/sh\n\n# Enter your shell script code here", "locked": true, "required": true },
-				{ "id":"annotate", "type":"checkbox", "title":"Add Date/Time Stamps to Log", "value": false },
-				{ "id":"pass", "type":"checkbox", "title":"Data Passthrough", "value": false }
+				{ "id":"annotate", "type":"checkbox", "title":"Add Date/Time Stamps to Log", "value": false }
 			]
 		} ],
 		[ "listPush", "global/plugins", {
