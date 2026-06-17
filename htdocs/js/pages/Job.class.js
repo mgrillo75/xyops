@@ -3282,7 +3282,7 @@ Page.Job = class Job extends Page.PageUtils {
 		// get pretty-printed and pruned job json
 		var job = deep_copy_object(this.job);
 		
-		delete job.activity;
+		// delete job.activity;
 		delete job.timelines;
 		// delete job.table;
 		// delete job.html;
