@@ -3888,7 +3888,7 @@ Page.PageUtils = class PageUtils extends Page.Base {
 			else if (item.source == 'universal') disp_icon = 'lock';
 			
 			var tooltip = item.source ? `title="(Inherited from ${item.source})"` : 'title="(Inherited from event)"';
-			if ((item.source == 'category') || (item.source == 'universal')) tooltip += ` style="color:var(--cyan)"`;
+			// if ((item.source == 'category') || (item.source == 'universal')) tooltip += ` style="color:var(--cyan)"`;
 			
 			html += '<div>'; // grid unit
 			html += `<div class="info_label">${disp.condition.title}</div>`;
@@ -3932,7 +3932,7 @@ Page.PageUtils = class PageUtils extends Page.Base {
 			else if (item.source == 'universal') icon = 'lock';
 			
 			var tooltip = item.source ? `title="(Inherited from ${item.source})"` : 'title="(Inherited from event)"';
-			if ((item.source == 'category') || (item.source == 'universal')) tooltip += ` style="color:var(--cyan)"`;
+			// if ((item.source == 'category') || (item.source == 'universal')) tooltip += ` style="color:var(--cyan)"`;
 			
 			html += '<div>'; // grid unit
 			html += `<div class="info_label">${nice_title}</div>`;
