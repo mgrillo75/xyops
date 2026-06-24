@@ -4316,7 +4316,7 @@ Page.PageUtils = class PageUtils extends Page.Base {
 			break;
 			
 			case 'wait':
-				label = get_text_from_seconds(node.data.wait, true, true);
+				label = get_text_from_seconds(node.data.wait, true, false);
 			break;
 			
 			case 'repeat':
