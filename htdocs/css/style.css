@@ -2049,6 +2049,18 @@ body.dark .box_buttons.floater {
 	box-shadow: 0px -2px 8px var(--background-color);
 }
 
+.box_buttons_badge_left {
+	float: left;
+	text-align: left;
+	line-height: 30px;
+	color: var(--label-color);
+	font-weight: bold;
+}
+.box_buttons_badge_left i.mdi:before {
+	transform: scale(1.25);
+	padding-right: 5px;
+}
+
 /* Plugin Params */
 
 .plugin_param_editor_cont {

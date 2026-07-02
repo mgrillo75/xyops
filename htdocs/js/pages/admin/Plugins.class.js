@@ -81,7 +81,9 @@ Page.Plugins = class Plugins extends Page.PageUtils {
 			var actions = [];
 			if (item.marketplace && app.hasPrivilege('edit_plugins')) actions.push( `<button class="link" data-plugin="${item.id}" onClick="$P().view_mkt_plugin_from_list(this)"><b>View</b></button>` );
 			else if (app.hasPrivilege('edit_plugins')) actions.push( `<button class="link" data-plugin="${item.id}" onClick="$P().edit_plugin_from_list(this)"><b>Edit</b></button>` );
-			if (app.hasPrivilege('delete_plugins')) actions.push( `<button class="link danger" data-plugin="${item.id}" onClick="$P().delete_plugin_from_list(this)"><b>Delete</b></button>` );
+			
+			if (item.marketplace && app.hasPrivilege('edit_plugins')) actions.push( `<button class="link danger" data-plugin="${item.id}" onClick="$P().delete_plugin_from_list(this)"><b>Uninstall</b></button>` );
+			else if (app.hasPrivilege('delete_plugins')) actions.push( `<button class="link danger" data-plugin="${item.id}" onClick="$P().delete_plugin_from_list(this)"><b>Delete</b></button>` );
 			
 			var tds = [
 				'<b>' + self.getNicePlugin(item, app.hasPrivilege('edit_plugins')) + '</b>',
@@ -398,6 +400,13 @@ Page.Plugins = class Plugins extends Page.PageUtils {
 		this.renderParamEditor();
 		this.setupBoxButtonFloater();
 		this.setupEditTriggers();
+		
+		if (this.plugin.marketplace) {
+			this.div.find('#d_ep_uid, #d_ep_gid').hide();
+		}
+		
+		if (this.args.delete) this.show_delete_plugin_dialog();
+		else if (this.args.test) this.do_test();
 	}
 	
 	do_test() {
@@ -1197,6 +1206,7 @@ Page.Plugins = class Plugins extends Page.PageUtils {
 		
 		// UID
 		html += this.getFormRow({
+			id: 'd_ep_uid',
 			label: 'Run as User:',
 			content: this.getFormText({
 				id: 'fe_ep_uid',
@@ -1209,6 +1219,7 @@ Page.Plugins = class Plugins extends Page.PageUtils {
 		
 		// GID
 		html += this.getFormRow({
+			id: 'd_ep_gid',
 			label: 'Run as Group:',
 			content: this.getFormText({
 				id: 'fe_ep_gid',
