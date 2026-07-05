@@ -645,6 +645,13 @@
 				"label": "Note Content:",
 				"caption": "Enter the note body text using [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) syntax."
 			},
+			"d_wfd_color": {
+				"label": "Highlight Color:",
+				"caption": "Optionally select a highlight color for the note."
+			},
+			"fe_wfd_color": {
+				"title": "Select Highlight Color"
+			},
 			"d_wfd_wide": {
 				"label": "Size:",
 				"caption": "Optionally give the note extra horizontal space."

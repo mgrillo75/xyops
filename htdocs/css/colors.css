@@ -438,3 +438,39 @@ ul.grid_row.clr_rose div.progress_bar_container {
 	background-color: color-mix(in srgb, var(--border-color) 25%, transparent);
 	box-shadow: inset -1px -1px 0px rgba(255, 255, 255, 0.25), inset 1px 1px 0px rgba(0, 0, 0, 0.25);
 }
+
+/* Workflow Note Colors */
+
+.wf_note.note_red { background: color-mix(in oklch, var(--color-red-500) 20%, var(--color-mix-base)); }
+.wf_note.note_fire { background: color-mix(in oklch, var(--color-fire-500) 20%, var(--color-mix-base)); }
+.wf_note.note_orange { background: color-mix(in oklch, var(--color-orange-500) 20%, var(--color-mix-base)); }
+.wf_note.note_tangerine { background: color-mix(in oklch, var(--color-tangerine-500) 20%, var(--color-mix-base)); }
+.wf_note.note_amber { background: color-mix(in oklch, var(--color-amber-500) 20%, var(--color-mix-base)); }
+.wf_note.note_gold { background: color-mix(in oklch, var(--color-gold-500) 20%, var(--color-mix-base)); }
+.wf_note.note_yellow { background: color-mix(in oklch, var(--color-yellow-500) 20%, var(--color-mix-base)); }
+.wf_note.note_lemon { background: color-mix(in oklch, var(--color-lemon-500) 20%, var(--color-mix-base)); }
+.wf_note.note_lime { background: color-mix(in oklch, var(--color-lime-500) 20%, var(--color-mix-base)); }
+.wf_note.note_grass { background: color-mix(in oklch, var(--color-grass-500) 20%, var(--color-mix-base)); }
+.wf_note.note_green { background: color-mix(in oklch, var(--color-green-500) 20%, var(--color-mix-base)); }
+.wf_note.note_mint { background: color-mix(in oklch, var(--color-mint-500) 20%, var(--color-mix-base)); }
+.wf_note.note_emerald { background: color-mix(in oklch, var(--color-emerald-500) 20%, var(--color-mix-base)); }
+.wf_note.note_aqua { background: color-mix(in oklch, var(--color-aqua-500) 20%, var(--color-mix-base)); }
+.wf_note.note_teal { background: color-mix(in oklch, var(--color-teal-500) 20%, var(--color-mix-base)); }
+.wf_note.note_turquoise { background: color-mix(in oklch, var(--color-turquoise-500) 20%, var(--color-mix-base)); }
+.wf_note.note_cyan { background: color-mix(in oklch, var(--color-cyan-500) 20%, var(--color-mix-base)); }
+.wf_note.note_ice { background: color-mix(in oklch, var(--color-ice-500) 20%, var(--color-mix-base)); }
+.wf_note.note_skyblue { background: color-mix(in oklch, var(--color-sky-500) 20%, var(--color-mix-base)); }
+.wf_note.note_azure { background: color-mix(in oklch, var(--color-azure-500) 20%, var(--color-mix-base)); }
+.wf_note.note_blue { background: color-mix(in oklch, var(--color-blue-500) 20%, var(--color-mix-base)); }
+.wf_note.note_sapphire { background: color-mix(in oklch, var(--color-sapphire-500) 20%, var(--color-mix-base)); }
+.wf_note.note_indigo { background: color-mix(in oklch, var(--color-indigo-500) 20%, var(--color-mix-base)); }
+.wf_note.note_lavender { background: color-mix(in oklch, var(--color-lavender-500) 20%, var(--color-mix-base)); }
+.wf_note.note_violet { background: color-mix(in oklch, var(--color-violet-500) 20%, var(--color-mix-base)); }
+.wf_note.note_orchid { background: color-mix(in oklch, var(--color-orchid-500) 20%, var(--color-mix-base)); }
+.wf_note.note_purple { background: color-mix(in oklch, var(--color-purple-500) 20%, var(--color-mix-base)); }
+.wf_note.note_magenta { background: color-mix(in oklch, var(--color-magenta-500) 20%, var(--color-mix-base)); }
+.wf_note.note_fuchsia { background: color-mix(in oklch, var(--color-fuchsia-500) 20%, var(--color-mix-base)); }
+.wf_note.note_hotpink { background: color-mix(in oklch, var(--color-hotpink-500) 20%, var(--color-mix-base)); }
+.wf_note.note_pink { background: color-mix(in oklch, var(--color-pink-500) 20%, var(--color-mix-base)); }
+.wf_note.note_blush { background: color-mix(in oklch, var(--color-blush-500) 20%, var(--color-mix-base)); }
+.wf_note.note_rose { background: color-mix(in oklch, var(--color-rose-500) 20%, var(--color-mix-base)); }
