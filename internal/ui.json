@@ -1221,7 +1221,8 @@
 		{ "id": "prefer_first", "title": "Prefer First (Alphabetical)", "icon": "sort-ascending" },
 		{ "id": "prefer_last", "title": "Prefer Last (Alphabetical)", "icon": "sort-descending" },
 		{ "id": "least_cpu", "title": "Least CPU Usage", "icon": "chip" },
-		{ "id": "least_mem", "title": "Least Memory Usage", "icon": "memory" }
+		{ "id": "least_mem", "title": "Least Memory Usage", "icon": "memory" },
+		{ "id": "fewest_jobs", "title": "Fewest Active Jobs", "icon": "run-fast" }
 	],
 	
 	"action_condition_menu": [ 
