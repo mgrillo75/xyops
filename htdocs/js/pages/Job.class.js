@@ -1404,7 +1404,7 @@ Page.Job = class Job extends Page.PageUtils {
 		var self = this;
 		var nice_tags = (this.job.tags || [])
 			.filter( function(tag) { return !tag.match(/^_/); } ) // filter out system tags
-			.map( function(tag) { return self.getNiceTag(tag, '#Search?tag=' + tag); } )
+			.map( function(tag) { return self.getNiceTag(tag, '#Search?tags=' + tag); } )
 			.join(' ');
 		
 		this.div.find('#d_job_banner_tags').html(nice_tags);
