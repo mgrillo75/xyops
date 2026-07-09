@@ -451,6 +451,10 @@ A boolean flag indicating if the event is enabled (can run jobs) or disabled.
 
 An optional icon ID for the event, displayed in the UI.  Icons are sourced from [Material Design Icons](https://materialdesignicons.com/).
 
+### Event.type
+
+An optional string identifying a special event subtype.  Standard events typically omit this property.  Workflow events set this to `workflow`, use the special plugin ID `_workflow`, and include an [Event.workflow](#event-workflow) object.
+
 ### Event.category
 
 The [Category.id](#category-id) of the category to which the event belongs.
@@ -496,7 +500,7 @@ When multiple servers are in the [Event.targets](#event-targets) array, xyOps us
 | `prefer_last_natural` | Prefer the last server when naturally sorted by the [Event.targets](#event-targets). |
 | `prefer_first` | Prefer the first server when alphabetically sorted by label or hostname. |
 | `prefer_last` | Prefer the last server when alphabetically sorted by label or hostname. |
-| `monitor:_ID_` | Pick the server with the lowest custom monitor value, specified by [Monitor.id](monitor-id) with a `monitor:` prefix. |
+| `monitor:_ID_` | Pick the server with the lowest custom monitor value, specified by [Monitor.id](#monitor-id) with a `monitor:` prefix. |
 
 ### Event.notes
 
@@ -586,7 +590,7 @@ A job is a running (or previously ran) instance of an event.  The job structure 
 | Property Name | Note |
 |---------------|--------|
 | `id` | Replaced with [Job.id](#job-id). |
-| `event` | The [Event.id](#event-id]) of the event which spawned the job. |
+| `event` | The [Event.id](#event-id) of the event which spawned the job. |
 | `title` | Removed from job structure when event is copied. |
 | `enabled` | Removed from job structure when event is copied. |
 | `created` | Removed from job structure when event is copied. |
@@ -1586,7 +1590,7 @@ The full body content of the ticket, in Markdown source format.
 
 ### Ticket.type
 
-The ticket type identifier, which should be one of: `issue`, `feature`, `change`, `maintenance`, `question` or `other`.
+The ticket type identifier, which should be one of: `issue`, `feature`, `release`, `change`, `maintenance`, `question` or `other`.
 
 ### Ticket.status
 
@@ -2877,7 +2881,7 @@ Additional properties may be present based on the type.
 
 #### Action.condition
 
-Each action has a `condition` property which specifies when it should fire.  The value may be one of:
+Each action has a `condition` property which specifies when it should fire.  For saved event, category, group and alert actions, the value may be one of:
 
 | Condition ID | Description |
 |------------|-------------|
@@ -2885,13 +2889,15 @@ Each action has a `condition` property which specifies when it should fire.  The
 | `complete` | Fires on job completion, regardless of the outcome. |
 | `success` | Fires on job success, i.e. when the `code` property is `0` or `false`. |
 | `error` | Fires on job errors, i.e. when the `code` property is any true value or string. |
+| `user` | Fires on custom user errors, i.e. when the `code` property is a custom value other than `warning`, `critical` or `abort`. |
 | `warning` | Fires on job warnings, i.e. when the `code` property is set to `"warning"`. |
 | `critical` | Fires on critical errors, i.e. when the `code` property is set to `"critical"`. |
 | `abort` | Fires when the job is aborted, either by user or special event (e.g. lost server). |
 | `tag:TAGID` | Fires on job completion only when a specific tag is present on the job. |
 | `alert_new` | Fires when a new alert is triggered on a server. |
 | `alert_cleared` | Fires when an active alert has cleared. |
-| `instant` | Special condition used for firing dynamic actions on-demand during a job. |
+
+Dynamic actions pushed from a running job via [Job.push](#job-push) may also use `instant`, which fires the action immediately instead of waiting for job completion.
 
 #### Action.type
 
@@ -3001,13 +3007,29 @@ Each trigger has a `type` property which describes its behavior.  The different 
 | `schedule` | **Schedule** | Set a repeating schedule to run the event (hourly, daily, etc.).  See [Schedule Rules](#schedule-rules) below. |
 | `interval` | **Interval** | Run the event on a repeating interval, given a starting date/time.  See [Intervals](#intervals) below. |
 | `single` | **Single Shot** | Set a single future exact date/time to run.  Requires an additional `epoch` property, set to the [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) at which to run. |
+| `magic` | **Magic Link** | Generate a secure URL which can launch the event without a login session.  See [Magic Link](triggers.md#magic-link) for details. |
+| `keyboard` | **Keyboard** | Bind one or more keyboard shortcuts to the event, so users can launch it from the UI.  Requires an additional `keys` property. |
+| `startup` | **Startup** | Automatically run the event when xyOps starts and becomes the primary conductor. |
 | `catchup` | **Catch-Up** | Ensure that *every* scheduled job runs, even if it has to run late. |
 | `nth` | **Every Nth** | Run only every Nth scheduled job.  See [Every Nth](triggers.md#every-nth) for details. |
 | `range` | **Range** | Set a starting and/or ending date for a repeating event.  Requires additional `start` and/or `end` properties, set to [Unix timestamps](https://en.wikipedia.org/wiki/Unix_time). |
 | `blackout` | **Blackout** | Set a blackout date/time range when the event *cannot* run.  Requires additional `start` and `end` properties, set to [Unix timestamps](https://en.wikipedia.org/wiki/Unix_time). |
 | `delay` | **Delay** | Set an optional starting delay for all scheduled jobs.  Requires an additional `duration` property, set to the number of seconds to delay each job by. |
 | `precision` | **Precision** | Set an optional array of exact `seconds` to fire jobs within the current scheduled minute. |
+| `quiet` | **Quiet** | Run scheduled jobs silently by making them invisible in the UI, and/or ephemeral so they self-delete upon completion. |
 | `plugin` | **Plugin** | Custom scheduler Plugin (user-defined).  Requires an additional `plugin_id` property, as well as a `params` object, for Plugin-defined configuration. |
+
+The UI trigger type menu also contains several scheduling presets.  These are convenience modes in the UI, and are converted into `schedule` trigger objects before being saved:
+
+| UI Type ID | Title | Saved As | Description |
+|------------|-------|----------|-------------|
+| `custom` | **Custom** | `schedule` | Custom schedule with any combination of years, months, days, weekdays, hours and minutes. |
+| `yearly` | **Yearly** | `schedule` | Schedule preset with month, day, hour and minute fields. |
+| `monthly` | **Monthly** | `schedule` | Schedule preset with day, hour and minute fields. |
+| `weekly` | **Weekly** | `schedule` | Schedule preset with weekday, hour and minute fields. |
+| `daily` | **Daily** | `schedule` | Schedule preset with hour and minute fields. |
+| `hourly` | **Hourly** | `schedule` | Schedule preset with minute fields. |
+| `crontab` | **Crontab** | `schedule` | Parses a crontab expression into schedule fields. |
 
 ##### Schedule Rules
 
@@ -3181,7 +3203,7 @@ An array of [WorkflowConnection](#workflowconnection)s in the workflow.
 
 ### WorkflowNode
 
-A workflow node is an object which represents an event, an ad-hoc job, a trigger, a limit, an action, or a controller.  Here is an example node in JSON format:
+A workflow node is an object which represents an event, an ad-hoc job, a trigger, a limit, an action, a controller, or a note.  Here is an example node in JSON format:
 
 ```json
 {
@@ -3205,7 +3227,7 @@ A unique lowercase alphanumeric ID for the node, which is automatically assigned
 
 #### WorkflowNode.type
 
-A string constant representing the node type, which will be one of: `event`, `job`, `trigger`, `limit`, `action`, or `controller`.
+A string constant representing the node type, which will be one of: `event`, `job`, `trigger`, `limit`, `action`, `controller`, or `note`.
 
 #### WorkflowNode.data
 
@@ -3219,6 +3241,7 @@ Nodes may have a `data` property which contains information specific to the node
 | `limit` | Will contain properties from the [Limit](#limit) object. |
 | `action` | Will contain properties from the [Action](#action) object. |
 | `controller` | Will contain properties specific to the controller type.  See below. |
+| `note` | Will contain note display properties such as `body`, `wide` and `show`. |
 
 For `event` and `job` nodes, the optional `replay` property may contain a previous [Job.id](#job-id).  When this is set, the workflow node replays that previous job instead of launching a new sub-job.  The replayed job contributes its original output data, output files, `workflowData`, tags and completion result to the workflow, and downstream wire conditions are evaluated from that replayed result.
 
