@@ -1999,6 +1999,13 @@ Page.PageUtils = class PageUtils extends Page.Base {
 				disp.icon = 'tag-plus-outline';
 			break;
 			
+			case 'label':
+				disp.type = "Apply Label";
+				disp.text = '"' + strip_html(action.label) + '"';
+				disp.desc = `&ldquo;${strip_html(action.label)}&rdquo;`;
+				disp.icon = 'label-outline';
+			break;
+			
 			case 'disable':
 				disp.type = "Disable Event";
 				disp.text = disp.desc = "(Current Event)";
@@ -2433,6 +2440,21 @@ Page.PageUtils = class PageUtils extends Page.Base {
 			caption: 'Select one or more tags to apply.'
 		});
 		
+		// label
+		html += this.getFormRow({
+			id: 'd_eja_label',
+			label: 'Custom Label:',
+			content: this.getFormText({
+				id: 'fe_eja_label',
+				spellcheck: 'false',
+				autocomplete: 'off',
+				maxlength: 8192,
+				placeholder: '',
+				value: action.label || ''
+			}),
+			caption: 'Enter a custom label to apply to the job.'
+		});
+		
 		// plugin
 		html += this.getFormRow({
 			id: 'd_eja_plugin',
@@ -2529,6 +2551,11 @@ Page.PageUtils = class PageUtils extends Page.Base {
 					if (!action.tags.length) return app.badField('#fe_eja_tags', "Please select one or more tags to apply.");
 				break;
 				
+				case 'label':
+					action.label = strip_html($('#fe_eja_label').val()).trim();
+					if (!action.label.length) return app.badField('#fe_eja_label', "Please enter a custom label to apply.");
+				break;
+				
 				case 'plugin':
 					action.plugin_id = $('#fe_eja_plugin').val();
 					if (!action.plugin_id) return app.badField('#fe_eja_plugin', "Please select a Plugin for the action.");
@@ -2542,7 +2569,7 @@ Page.PageUtils = class PageUtils extends Page.Base {
 		} ); // Dialog.confirm
 		
 		var change_action_type = function(new_type) {
-			$('#d_eja_email, #d_eja_users, #d_eja_body, #d_eja_web_hook, #d_eja_web_hook_text, #d_eja_run_job, #d_eja_target_server, #d_eja_clear_alert, #d_eja_event_params, #d_eja_start_delay, #d_eja_channel, #d_eja_bucket, #d_eja_bucket_sync, #d_eja_bucket_glob, #d_nt_type, #d_nt_assignees, #d_nt_tags, #d_nt_due_preset, #d_eja_tags, #d_eja_suspend_sources, #d_eja_plugin, #d_eja_plugin_params').hide();
+			$('#d_eja_email, #d_eja_users, #d_eja_body, #d_eja_web_hook, #d_eja_web_hook_text, #d_eja_run_job, #d_eja_target_server, #d_eja_clear_alert, #d_eja_event_params, #d_eja_start_delay, #d_eja_channel, #d_eja_bucket, #d_eja_bucket_sync, #d_eja_bucket_glob, #d_nt_type, #d_nt_assignees, #d_nt_tags, #d_nt_due_preset, #d_eja_tags, #d_eja_label, #d_eja_suspend_sources, #d_eja_plugin, #d_eja_plugin_params').hide();
 			
 			switch (new_type) {
 				case 'email':
@@ -2595,6 +2622,10 @@ Page.PageUtils = class PageUtils extends Page.Base {
 				
 				case 'tag':
 					$('#d_eja_tags').show();
+				break;
+				
+				case 'label':
+					$('#d_eja_label').show();
 				break;
 				
 				case 'disable':
@@ -4232,6 +4263,12 @@ Page.PageUtils = class PageUtils extends Page.Base {
 				title = "Apply Tags";
 				label = this.getNiceTagListText(action.tags);
 				icon = 'tag-plus-outline';
+			break;
+			
+			case 'label':
+				title = "Apply Label";
+				label = `&ldquo;${strip_html(action.label)}&rdquo;`;
+				icon = 'label-outline';
 			break;
 			
 			case 'disable':

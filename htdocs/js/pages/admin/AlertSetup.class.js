@@ -632,7 +632,7 @@ Page.AlertSetup = class AlertSetup extends Page.PageUtils {
 			
 			action_type_filter: function(item) { 
 				// filter out unsupported actions for alerts
-				return !item.id.match(/^(disable|delete|store|fetch|suspend|tag)$/); 
+				return !item.id.match(/^(disable|delete|store|fetch|suspend|tag|label)$/); 
 			},
 			
 			callback: function(action) {

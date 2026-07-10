@@ -1245,6 +1245,7 @@
 	],
 	
 	"action_type_menu": [
+		{ "id": "label", "title": "Apply Label", "icon": "label-outline" },
 		{ "id": "tag", "title": "Apply Tags", "icon": "tag-plus-outline" },
 		{ "id": "ticket", "title": "Create Ticket", "icon": "text-box-plus-outline" },
 		{ "id": "delete", "title": "Delete Event", "icon": "trash-can-outline" },

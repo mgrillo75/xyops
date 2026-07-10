@@ -2914,6 +2914,7 @@ Each action has a `type` property which dictates what will happen when the condi
 | `snapshot` | Take a server snapshot for the action (no extra properties defined). |
 | `suspend` | Suspend (pause) a workflow until a user resumes in the UI.  No extra properties defined. |
 | `tag` | Add one or more [Tags](tags.md) to the running job or workflow. |
+| `label` | Add a custom label to the running job or workflow. |
 | `store` | Store data in a storage bucket. Requires `bucket_id` (the [Bucket.id](#bucket-id)), `bucket_sync` (species if files and/or data should be stored), and `bucket_glob` (glob pattern to match on files). |
 | `fetch` | Fetch data from a storage bucket. Requires `bucket_id` (the [Bucket.id](#bucket-id)), `bucket_sync` (species if files and/or data should be fetched), and `bucket_glob` (glob pattern to match on files). |
 | `ticket` | Create a ticket.  Requires `ticket_type` (see [Ticket.type](#ticket-type)), `ticket_assignees` (an array of [User.username](#user-username)s), and `ticket_tags` (an array of [Tag.id](#tag-id)s).  Can also include `ticket_due`, as an absolute Unix epoch time or a relative date delta such as `3 days`. |
