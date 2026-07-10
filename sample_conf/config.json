@@ -374,6 +374,13 @@
 			"accepted_file_types": "",
 			"user_file_expiration": "30 days",
 			"plugin_file_expiration": "30 days"
+		},
+		
+		"run_event_dialog": {
+			"hide_files": false,
+			"hide_tags": false,
+			"hide_priority": false,
+			"hide_params": false
 		}
 	},
 	

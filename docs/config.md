@@ -714,7 +714,9 @@ See [pixl-chart](https://github.com/jhuckaby/pixl-chart) for more details.
 ### client.editor_defaults
 <!-- Title: Code Editor Defaults -->
 
-Default code editor preferences (tabs, indent, line wrapping) for [CodeMirror](https://codemirror.net/5/) fields in the UI.  The defaults are:
+Default code editor preferences (tabs, indent, line wrapping) for [CodeMirror](https://codemirror.net/5/) fields in the UI.
+
+The defaults are:
 
 ```json
 "editor_defaults": {
@@ -733,7 +735,9 @@ See [CodeMirror](https://codemirror.net/5/) for more details.
 ### client.bucket_upload_settings
 <!-- Title: Bucket Upload Settings -->
 
-Client-side limits for bucket uploads (max files/size/types). Enforced in the UI before upload, and enforced server-side.  The defaults are:
+Client-side limits for bucket uploads (max files/size/types). Enforced in the UI before upload, and enforced server-side.
+
+The defaults are:
 
 ```json
 "bucket_upload_settings": {
@@ -746,7 +750,9 @@ Client-side limits for bucket uploads (max files/size/types). Enforced in the UI
 ### client.ticket_upload_settings
 <!-- Title: Ticket Upload Settings -->
 
-Client-side limits for ticket attachments (max files/size/types). Enforced in the UI before upload, and enforced server-side.  The defaults are:
+Client-side limits for ticket attachments (max files/size/types). Enforced in the UI before upload, and enforced server-side.
+
+The defaults are:
 
 ```json
 "ticket_upload_settings": {
@@ -759,7 +765,9 @@ Client-side limits for ticket attachments (max files/size/types). Enforced in th
 ### client.job_upload_settings
 <!-- Title: Job Upload Settings -->
 
-Client-side limits for job file uploads (max files/size/types) and default expiration for user/plugin files.  The defaults are:
+Client-side limits for job file uploads (max files/size/types) and default expiration for user/plugin files.
+
+The defaults are:
 
 ```json
 "job_upload_settings": {
@@ -768,6 +776,22 @@ Client-side limits for job file uploads (max files/size/types) and default expir
 	"accepted_file_types": "",
 	"user_file_expiration": "30 days",
 	"plugin_file_expiration": "30 days"
+}
+```
+
+### client.run_event_dialog
+<!-- Title: Run Event Dialog Settings -->
+
+Client-side configuration for the "Run Event" dialog, offering the ability to globally hide specific sections.
+
+The defaults are:
+
+```json
+"run_event_dialog": {
+	"hide_files": false,
+	"hide_tags": false,
+	"hide_priority": false,
+	"hide_params": false
 }
 ```
 

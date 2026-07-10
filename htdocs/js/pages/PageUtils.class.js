@@ -6031,6 +6031,7 @@ Page.PageUtils = class PageUtils extends Page.Base {
 		var self = this;
 		var title = "Run Event";
 		var btn = ['run-fast', 'Run Now'];
+		var re_config = config.run_event_dialog || {};
 		var html = '';
 		app.clearError();
 		
@@ -6056,18 +6057,22 @@ Page.PageUtils = class PageUtils extends Page.Base {
 		var ok_show_files = true;
 		var limit = find_object( limits, { type: 'file', enabled: true } );
 		if (limit && (limit.amount == 0)) ok_show_files = false;
+		if (re_config.hide_files) ok_show_files = false;
 		
 		// event may disallow tags
 		var ok_show_tags = true;
 		var tag_limit = find_object( limits, { type: 'tag', enabled: true } );
 		if (tag_limit && (tag_limit.amount == 0)) ok_show_tags = false;
+		if (re_config.hide_tags) ok_show_tags = false;
 		
 		// queue priority
 		var queue_limit = find_object( limits, { type: 'queue', enabled: true } );
 		var ok_show_priority = !!(queue_limit && queue_limit.amount);
+		if (re_config.hide_priority) ok_show_priority = false;
 		
 		// show or hide params as needed
 		var ok_show_params = !!(event.fields && event.fields.length);
+		if (re_config.hide_params) ok_show_params = false;
 		
 		if (ok_show_params || ok_show_files || ok_show_tags || ok_show_priority) {
 			// complex dialog with form fields
