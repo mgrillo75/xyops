@@ -1,5 +1,15 @@
 # xyOps Changelog
 
+## Version v1.0.81
+
+> July 10, 2026
+
+- [`30e06bc1`](https://github.com/pixlcore/xyops/commit/30e06bc18e06aec2183e7dfcd1f9fe991e016048): Version 1.0.81
+- [`eeb3ff08`](https://github.com/pixlcore/xyops/commit/eeb3ff084d4361cccd0ed14ba02847a04ccfed7d): Feature: New "Apply Label" job action, for events or workflows.
+- [`7babc5fb`](https://github.com/pixlcore/xyops/commit/7babc5fb4f0ddcde5a3373f5226798b7ed850f6c): UI Tweak: Change "User Fields" to "User Parameters" to be consistent across the app.
+- [`641d4839`](https://github.com/pixlcore/xyops/commit/641d4839ea62bfd37b95f5cee4c09398f08a9505): Docs: send_email API: Add note about specifying a HTML formatted body.  Fixes #364.
+- [`91d36a17`](https://github.com/pixlcore/xyops/commit/91d36a1722d346243de2d7525f2fca74dfc26062): Bug Fix: Stop storing Event Plugin script inside job object (no longer needed).
+
 ## Version v1.0.80
 
 > July 9, 2026
