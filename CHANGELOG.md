@@ -1,5 +1,20 @@
 # xyOps Changelog
 
+## Version v1.0.83
+
+> July 16, 2026
+
+- [`f24c1580`](https://github.com/pixlcore/xyops/commit/f24c15801a614db1a8615c6f06db6aa86f2d4322): Version 1.0.83
+- [`5868aded`](https://github.com/pixlcore/xyops/commit/5868adedb4abc50b0022911f1a7879dd05bcf609): Feature: Add "password" text field variant in the UI.
+- [`cc3457e2`](https://github.com/pixlcore/xyops/commit/cc3457e21ed209315829c8ef800c24edcb1f1afe): Feature: Add sortable last modified date to event list (only on wide screens).
+- [`2aebbc54`](https://github.com/pixlcore/xyops/commit/2aebbc5447e796ba27a42c4e9634cd910c16e60f): Feature: Stagger parallel scheduled job launches by 50ms (configurable), for scalability.
+- [`d2f6c03c`](https://github.com/pixlcore/xyops/commit/d2f6c03cfcd2ff8337d222941e3ec17d9031f0c7): Bug Fix: Event history graphs may render incorrectly with large numbers of parallel executed jobs.
+- [`80eb5ec7`](https://github.com/pixlcore/xyops/commit/80eb5ec770ce677813b02026319b33d7ca4d92f0): Feature: Improve scalability by debouncing job status broadcasts.
+- [`3986605b`](https://github.com/pixlcore/xyops/commit/3986605b26753b4508b9a1643ba9b03902a631af): Bug Fix: Include magic and keyboard triggers in event timing summary text.
+- [`98bcd05d`](https://github.com/pixlcore/xyops/commit/98bcd05d47470544d175f0993efccf35d0250b07): Bug Fix: requireMaster error path was returning an HTTP 200.  Changed to 500.
+- [`7b088270`](https://github.com/pixlcore/xyops/commit/7b0882704de4e58cdc7f5e60d1869816d8264093): Meta: Add provenance attestation to GitHub Actions build artifacts.
+- [`14ddde19`](https://github.com/pixlcore/xyops/commit/14ddde19d1ea3853687480904076284ec05c2c1e): Feature: Allow Plugins to define `uid` and `gid` parameters, and if they are admin-locked, they can be overridden at the event / trigger level.  Fixes #373.
+
 ## Version v1.0.82
 
 > July 14, 2026
